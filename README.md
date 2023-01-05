@@ -30,8 +30,8 @@ Commands(PHP):
   dbgpProxy   在远程服务器上开启DBGp Proxy代理
   
 Commands(Golang):
-  dlv      Attach local standard input, output, and error streams to a running container
-  rsync       Build an image from a Dockerfile
+  dlv         Start a dlv process
+  rsync       Start a Rsync Server waiting for local binary files
  
 Commands(Python):
   attach      Attach local standard input, output, and error streams to a running container

@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/slyang-git/debug/commands"
+)
 
 var artStr string = `
 ██████╗ ███████╗██████╗ ██╗   ██╗ ██████╗ 
@@ -13,4 +16,6 @@ var artStr string = `
 
 func main() {
 	fmt.Println(artStr)
+	commands.Execute()
+
 }

@@ -1,5 +1,5 @@
 # debug-go
-The golang version of remote debug tool:dizzy:. 
+The golang version of remote debug tool :dizzy:. 
 
 ```textmate
 ██████╗ ███████╗██████╗ ██╗   ██╗ ██████╗ 
@@ -26,7 +26,8 @@ Options:
   -v, --version            Print version information and quit
 
 Commands(PHP):
-  xdebug      Attach local standard input, output, and error streams to a running container
+  xdebug      在远程服务器上开启xdebug插件
+  dbgpProxy   在远程服务器上开启DBGp Proxy代理
   
 Commands(Golang):
   dlv      Attach local standard input, output, and error streams to a running container
@@ -39,5 +40,4 @@ Commands(Python):
 Commands(C/C++):
   attach      Attach local standard input, output, and error streams to a running container
   build       Build an image from a Dockerfile
-  commit      Create a new image from a container's changes
 ```

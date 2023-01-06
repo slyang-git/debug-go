@@ -16,6 +16,8 @@ var artStr string = `
 
 func main() {
 	fmt.Println(artStr)
-	commands.Execute()
+	if err := commands.Execute(); err != nil {
+		os.Exit(1)
+	}
 
 }

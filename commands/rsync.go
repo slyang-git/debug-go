@@ -9,6 +9,9 @@ var (
 		Use: "rsync",
 		Short: "rsync is for upload files",
 		Long: "hello world hello world",
+		Run: func(cmd *cobra.Command, args []string){
+			// do something
+		},
 	}
 )
 

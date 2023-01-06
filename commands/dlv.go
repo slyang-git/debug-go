@@ -7,6 +7,8 @@ import (
 var (
 	dlvCmd = &cobra.Command{
 		Use: "dlv",
+		Short: "hello",
+		Long: "hello world hello world",
 	}
 )
 

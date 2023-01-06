@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/slyang-git/debug/commands"
+	"github.com/slyang-git/debug/cmd"
 )
 
 var artStr string = `
@@ -16,7 +16,7 @@ var artStr string = `
 
 func main() {
 	fmt.Println(artStr)
-	if err := commands.Execute(); err != nil {
+	if err := cmd.Execute(); err != nil {
 		os.Exit(1)
 	}
 

@@ -8,7 +8,7 @@
 // 
 // When a user only run `debug dlv`, it will read a config file firstly. If there is no config file, it will promote a error msg ask user to supply a process ID.
 
-package commands
+package cmd
 
 import (
 	"fmt"

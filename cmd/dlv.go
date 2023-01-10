@@ -11,7 +11,10 @@
 package cmd
 
 import (
+	"bufio"
 	"fmt"
+	"os/exec"
+	"strings"
 
 	"github.com/spf13/cobra"
 )
@@ -19,6 +22,9 @@ import (
 var (
 	ProcessID  string
 	ListenPort string
+
+	ProcessTableHeader []string
+	ProcessRecords     []map[string]string
 
 	dlvCmd = &cobra.Command{
 		Use:   "dlv",
@@ -30,6 +36,44 @@ var (
 			ProcessID, _ = cmd.Flags().GetString("pid")
 			ListenPort, _ = cmd.Flags().GetString("port")
 			fmt.Println(ProcessID, ListenPort)
+
+			command := exec.Command("ps", "-el")
+
+			stdout, err := command.StdoutPipe()
+			if err != nil {
+				fmt.Println(err)
+			}
+
+			command.Start()
+
+			buf := bufio.NewReader(stdout)
+
+			line, _, _ := buf.ReadLine()
+			for _, v := range strings.Fields(string(line)) {
+				fmt.Println(v)
+				ProcessTableHeader = append(ProcessTableHeader, v)
+			}
+			fmt.Println(ProcessTableHeader)
+
+			for len(line) > 0 {
+				line, _, _ = buf.ReadLine()
+
+				tmp := make(map[string]string)
+				for i, v := range strings.Fields(string(line)) {
+					tmp[ProcessTableHeader[i]] = v
+				}
+				ProcessRecords = append(ProcessRecords, tmp)
+				// fmt.Println(string(line))
+			}
+
+			// fmt.Println(ProcessRecords)
+			for _, v := range ProcessRecords {
+				for k, vv := range v {
+					fmt.Println(k, vv)
+				}
+            }
+			
+
 		},
 	}
 )

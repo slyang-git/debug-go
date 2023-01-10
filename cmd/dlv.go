@@ -16,6 +16,7 @@ import (
 	"os/exec"
 	"strings"
 
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
 
@@ -35,7 +36,7 @@ var (
 			// fmt.Println(args)
 			ProcessID, _ = cmd.Flags().GetString("pid")
 			ListenPort, _ = cmd.Flags().GetString("port")
-			fmt.Println(ProcessID, ListenPort)
+			// fmt.Println(ProcessID, ListenPort)
 
 			command := exec.Command("ps", "-el")
 
@@ -50,10 +51,10 @@ var (
 
 			line, _, _ := buf.ReadLine()
 			for _, v := range strings.Fields(string(line)) {
-				fmt.Println(v)
+				// fmt.Println(v)
 				ProcessTableHeader = append(ProcessTableHeader, v)
 			}
-			fmt.Println(ProcessTableHeader)
+			// fmt.Println(ProcessTableHeader)
 
 			for len(line) > 0 {
 				line, _, _ = buf.ReadLine()
@@ -62,17 +63,34 @@ var (
 				for i, v := range strings.Fields(string(line)) {
 					tmp[ProcessTableHeader[i]] = v
 				}
-				ProcessRecords = append(ProcessRecords, tmp)
+
+				if tmp["PID"] != "" {
+					ProcessRecords = append(ProcessRecords, tmp)
+				}
 				// fmt.Println(string(line))
 			}
 
 			// fmt.Println(ProcessRecords)
+			fmt.Print("|")
+			for _, h := range ProcessTableHeader {
+				color.Set(color.FgGreen)
+				fmt.Printf("%-10v|", h)
+				color.Unset()
+			}
+			fmt.Print("\n")
+			fmt.Println(strings.Repeat("-", 11*len(ProcessTableHeader)+1))
+
+			// fmt.Print("\n")
 			for _, v := range ProcessRecords {
-				for k, vv := range v {
-					fmt.Println(k, vv) 
+				fmt.Print("|")
+				for _, vv := range ProcessTableHeader {
+					color.Set(color.FgGreen)
+					fmt.Printf("%-10s|", v[vv])
+					color.Unset()
 				}
-            }
-			
+				fmt.Print("\n")
+			}
+			fmt.Println(strings.Repeat("-", 11*len(ProcessTableHeader)+1))
 
 		},
 	}
